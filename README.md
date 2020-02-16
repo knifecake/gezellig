@@ -21,4 +21,41 @@ devtools::install_github("knifecake/gezellig")
 
 ### Tabular data loader
 
+The tabular data loader is a set of inputs that facilitates loading
+tabular data. The justification of this module is that tabular data
+formats are not so standard: field separators may be tabs or commas,
+field delimiters may be double or single quotes, decimal separators may
+be commas or dots, etc. Furthermore, all these options can be combined
+giving rise to dozens of micro formats. This module allows the user to
+adjust these parameters. More precisely, it provides a graphical wrapper
+around some of the parameters of the R function `read.table`. It is
+intended to be used interactively: the user should play around with the
+options until the data looks right (for this, accompanying the module
+with a table preview is useful).
+
+A simple deployment of the module may look like this:
+
+``` r
+library(shiny)
+library(gezellig)
+
+ui <- fluidPage(
+  tabular_data_loader_input("tabular"),
+  tableOutput("tabular_output")
+)
+
+
+server <- function(input, output, session) {
+  df <- callModule(tabular_data_loader, "tabular")
+
+  output$tabular_output <- renderTable(df(), rownames = TRUE)
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+Functionality can be further customised, for instance by hiding some
+input controls. For more details consult the documentation by typing
+`?tabular_data_loader_input` into an interactive R session.
+
 ### Table inputs
