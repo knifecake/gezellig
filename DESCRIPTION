@@ -4,8 +4,7 @@ Title: A collection of UI modules for Shiny
 Version: 0.1.0
 Authors@R: c(
     person("Elias", "Hernandis", email = "eliashernandis@gmail.com",
-           role = c("aut", "cre"), comment = c(ORCID = "0000-0002-2645-0080")),
-    person("Egeland", "Thore", email = "thore.egeland@nmbu.no", role = "ctb"))
+           role = c("aut", "cre"), comment = c(ORCID = "0000-0002-2645-0080")))
 Maintainer: Elias Hernandis <eliashernandis@gmail.com>
 Description: Sophisticated UI modules such as a tabular data loader or a table
     with inputs inside the cells. This package is intended to be used in larger
@@ -15,3 +14,5 @@ BugReports: https://github.com/knifecake/gezellig/issues
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.0.2
+Imports: 
+    jsonlite
