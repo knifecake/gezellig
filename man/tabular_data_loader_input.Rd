@@ -33,6 +33,8 @@ as a header}
 \item{allow_rownames_toggle}{wether to give the option to treat the first
 column as a header}
 
+\item{na_string}{the string to be used for NA values}
+
 \item{allowed_decimal_separators}{the characters that may be used to separate
 the integral and fractional parts in a number}
 

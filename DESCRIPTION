@@ -1,12 +1,17 @@
 Package: gezellig
 Type: Package
-Title: What the Package Does (Title Case)
+Title: A collection of UI modules for Shiny 
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Authors@R: c(
+    person("Elias", "Hernandis", email = "eliashernandis@gmail.com",
+           role = c("aut", "cre"), comment = c(ORCID = "0000-0002-2645-0080")),
+    person("Egeland", "Thore", email = "thore.egeland@nmbu.no", role = "ctb"))
+Maintainer: Elias Hernandis <eliashernandis@gmail.com>
+Description: Sophisticated UI modules such as a tabular data loader or a table
+    with inputs inside the cells. This package is intended to be used in larger
+    shiny applications which require more advanced data input.
+License: MIT + file LICENSE
+BugReports: https://github.com/knifecake/gezellig/issues
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.0.2

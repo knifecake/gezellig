@@ -13,7 +13,7 @@ tabular_data_loader(input, output, session, id)
 
 \item{session}{the shiny \code{session} object}
 
-\item{id}{}
+\item{id}{the id given to the input}
 }
 \value{
 a \code{\link{data.frame}} wrapped inside a reactive context
@@ -22,5 +22,6 @@ a \code{\link{data.frame}} wrapped inside a reactive context
 Tabular data loader
 }
 \seealso{
-\code{\link{tabular_data_loader_input}} for the input function
+\code{\link{tabular_data_loader_input}} for the input function and
+  an example
 }

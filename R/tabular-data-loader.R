@@ -22,6 +22,7 @@
 #'   as a header
 #' @param allow_rownames_toggle wether to give the option to treat the first
 #'   column as a header
+#' @param na_string the string to be used for NA values
 #' @param allowed_decimal_separators the characters that may be used to separate
 #'   the integral and fractional parts in a number
 #' @param allow_transposition whether to give the option to transpose the table
@@ -84,23 +85,24 @@ tabular_data_loader_input <- function(id,
 #' @param input the shiny \code{input} object
 #' @param output the shiny \code{output} object
 #' @param session the shiny \code{session} object
-#' @param id
+#' @param id the id given to the input
 #'
 #' @return a \code{\link{data.frame}} wrapped inside a reactive context
 #'
-#' @seealso \code{\link{tabular_data_loader_input}} for the input function
+#' @seealso \code{\link{tabular_data_loader_input}} for the input function and
+#'   an example
 #'
 #' @export
 tabular_data_loader <- function(input, output, session, id) {
   reactive({
     req(input$file)
 
-    df = read.table(input$file$datapath,
-                    header = input$header,
-                    sep = input$sep,
-                    quote = input$quote,
-                    na.strings = input$na_string,
-                    row.names = if (input$rownames) 1 else NULL)
+    df <- read.table(input$file$datapath,
+                     header = input$header,
+                     sep = input$sep,
+                     quote = input$quote,
+                     na.strings = input$na_string,
+                     row.names = if (input$rownames) 1 else NULL)
 
     if (isTruthy(input$transpose)) t(df) else df
   })
