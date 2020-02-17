@@ -26,6 +26,7 @@
 #' @param allowed_decimal_separators the characters that may be used to separate
 #'   the integral and fractional parts in a number
 #' @param allow_transposition whether to give the option to transpose the table
+#' @param cols number of columns through which to display the input controls
 #'
 #' @return a list of tags that can be included in a shiny UI definition
 #'
@@ -62,10 +63,12 @@ tabular_data_loader_input <-
            na_string = "NA",
            allowed_decimal_separators = c("Dot" = ".",
                                           "Comma" = ","),
-           allow_transposition = FALSE) {
+           allow_transposition = FALSE,
+           cols = 1) {
   ns <- NS(id)
 
-  tagList(
+  div(
+    css_tweaks(cols),
     fileInput(ns("file"), file_label),
     if (!is.null(allowed_field_separators))
       radioButtons(ns("sep"),
@@ -95,9 +98,7 @@ tabular_data_loader_input <-
       checkboxInput(ns("transpose"),
                     "Transpose table",
                     value = allow_transposition),
-
-    # dummy tag to avoid a syntax error
-    tags$div()
+    class = "multicolumn-form"
   )
 }
 
@@ -127,4 +128,20 @@ tabular_data_loader <- function(input, output, session, id) {
 
     if (isTruthy(input$transpose)) t(df) else df
   })
+}
+
+css_tweaks <- function(cols) {
+  list(
+    tags$head(
+      tags$style(
+        HTML(sprintf("
+.multicolumn-form {
+  column-count: %d;
+  column-gap: 1rem;
+}
+
+.multicolumn-form .form-group {
+  break-inside: avoid;
+  margin-left: 1px;
+}", cols)))))
 }

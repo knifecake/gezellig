@@ -5,9 +5,17 @@ ui <- fluidPage(
    titlePanel("Gezellig demos"),
    tabsetPanel(
      # Tabular loader
-     tabPanel("Tabular loader",
-       tabular_data_loader_input("tabular"),
-       tableOutput("tabular_output")
+     tabPanel(
+       "Tabular loader",
+       wellPanel(
+         tabular_data_loader_input("tabular", cols = 3)
+       ),
+
+       h3("Preview"),
+       div(
+         tableOutput("tabular_output"),
+         class = "table-responsive"
+       )
      ),
 
      # Table input (ti)
@@ -30,15 +38,15 @@ server <- function(input, output, session) {
                    data = ti_data)
 }
 
-ti_fields <- list(ti_label("Name"),
+ti_fields <- list(ti_label("Task"),
                   ti_checkbox("Done"),
                   ti_dropdown("Priority", c("normal" = "Normal",
                                             "high" = "High")),
                   ti_text("Contents"))
 
-ti_data <- data.frame(Name = c("Task 1", "Task 2"),
-                      Done = c(TRUE, FALSE),
-                      Priority = c("normal", "high"),
-                      Contents = c("My first task", "Another task"))
+ti_data <- data.frame(Task = c("Clean up the house", "Walk the dog", "Groceries", "P = NP?"),
+                      Done = c(TRUE, FALSE, FALSE, FALSE),
+                      Priority = c("normal", "high", "normal", "high"),
+                      Contents = c("Toilets done last week", "Potty training: 90%", "Cheese and bread", "Iteration #1928832"))
 
 shinyApp(ui = ui, server = server)

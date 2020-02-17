@@ -26,7 +26,7 @@ const buildRadioButtons = function(field, selected) {
 
 const buildText = function(field, value) {
   return '<form class="form-inline">' +
-    '<input type="text" value="' + value + '"></form>';
+    '<input style="width: 100%" type="text" value="' + value + '"></form>';
 };
 
 const buildHeader = function(fields) {

@@ -44,6 +44,9 @@ intended to be used interactively: the user should play around with the
 options until the data looks right (for this, accompanying the module
 with a table preview is useful).
 
+![Screenshot of the tabular loader
+module](man/figures/tabular-loader-screenshot.png)
+
 A simple deployment of the module may look like this:
 
 ``` r
@@ -75,6 +78,9 @@ Table inputs is a custom input object that allows tables to contain
 other input objects such as checkboxes, radio buttons and dropdowns. It
 is intended for those cases where the same inputs are required for a
 bunch of items and hence it makes sense to organise them in a table.
+
+![Screenshot of the table input
+module](man/figures/table-input-screenshot.png)
 
 A simple deployment of the module might look like this.
 
