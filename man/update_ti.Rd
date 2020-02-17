@@ -4,7 +4,7 @@
 \alias{update_ti}
 \title{Update a table input}
 \usage{
-update_ti(session, id = "namespace", fields, data)
+update_ti(session, id, fields, data)
 }
 \arguments{
 \item{session}{the shiny session object}

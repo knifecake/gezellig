@@ -15,6 +15,32 @@ a list of tags that can be used as part of a shiny UI definition
 \description{
 A table which has inputs on its cells
 }
+\examples{
+## Only run examples in interactive R sessions
+if (interactive()) {
+
+ti_fields = list(ti_label("Name"),
+                 ti_checkbox("Done"),
+                 ti_dropdown("Priority", c("normal" = "Normal",
+                                           "high" = "High")))
+
+ti_data = data.frame(Name = c("Task 1", "Task 2"),
+                     Done = c(TRUE, FALSE),
+                     Priority = c("normal", "high"))
+
+ui <- fluidPage(
+  ti_input("table_input")
+)
+
+
+server <- function(input, output, session) {
+  tb <- callModule(ti, "table_input",
+                   fields = ti_fields,
+                   data = ti_data)
+}
+}
+
+}
 \seealso{
 \code{\link{ti}} for the server part of this module
 }

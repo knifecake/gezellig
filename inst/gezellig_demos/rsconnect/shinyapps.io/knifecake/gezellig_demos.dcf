@@ -1,0 +1,12 @@
+name: gezellig_demos
+title: gezellig_demos
+username:
+account: knifecake
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1820075
+bundleId: 2805216
+url: https://knifecake.shinyapps.io/gezellig_demos/
+when: 1581900677.93323
+asMultiple: FALSE
+asStatic: FALSE

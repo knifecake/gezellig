@@ -93,17 +93,20 @@ let binding = new Shiny.InputBinding();
 
 $.extend(binding, {
   find: function(scope) {
-    return $(scope).find('.settings-table');
+    console.log("found");
+    return $(scope).find('.gz_table_input');
   },
 
   initialize: function(el) {
   },
 
   subscribe: function(el, callback) {
+    console.log("subscribed");
     $(el).on('change', 'input, select', callback);
   },
 
   receiveMessage: function(el, message) {
+    console.log("received message");
     buildTable(el, message.data, message.fields);
   },
 

@@ -4,7 +4,7 @@
 \alias{ti}
 \title{Table input (server function)}
 \usage{
-ti(input, output, session, id, fields)
+ti(input, output, session, id, fields, data)
 }
 \arguments{
 \item{input}{the shiny \code{input} object}
@@ -17,6 +17,8 @@ ti(input, output, session, id, fields)
 
 \item{fields}{a list of fields (see \code{\link{ti_inputs}}) to include on
 each row}
+
+\item{data}{a matrix representing the state of the fields}
 }
 \description{
 Table input (server function)
