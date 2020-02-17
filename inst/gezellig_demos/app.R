@@ -28,10 +28,6 @@ server <- function(input, output, session) {
   tb <- callModule(ti, "table_input",
                    fields = ti_fields,
                    data = ti_data)
-
-  observe({
-    print(tb())
-  })
 }
 
 ti_fields <- list(ti_label("Name"),
