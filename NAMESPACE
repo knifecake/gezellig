@@ -3,6 +3,7 @@
 export(start_demo)
 export(tabular_data_loader)
 export(tabular_data_loader_input)
+export(ti)
 export(ti_checkbox)
 export(ti_dropdown)
 export(ti_input)

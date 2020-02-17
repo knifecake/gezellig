@@ -64,6 +64,8 @@ ti_input <- function(id) {
 #'   each row
 #' @param data a matrix representing the state of the fields
 #'
+#' @export
+#'
 #' @seealso \code{\link{ti_input}} for the UI function and
 #'   \code{\link{update_ti}} for updating the ti on the fly (similarly to
 #'   \code{updateSelectInput} for instance).
