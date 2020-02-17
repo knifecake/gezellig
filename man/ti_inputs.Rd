@@ -6,6 +6,7 @@
 \alias{ti_checkbox}
 \alias{ti_dropdown}
 \alias{ti_radio}
+\alias{ti_text}
 \title{Inputs for table input (ti)}
 \usage{
 ti_label(name)
@@ -15,6 +16,8 @@ ti_checkbox(name)
 ti_dropdown(name, options)
 
 ti_radio(name, options)
+
+ti_text(name)
 }
 \arguments{
 \item{name}{the input name}

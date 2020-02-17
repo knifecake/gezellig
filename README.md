@@ -20,8 +20,11 @@ devtools::install_github("knifecake/gezellig")
 ## Demo
 
 The package includes a small Shiny application demonstrating all the
-custom input objects available. After installing the package, you may
-launch it with
+custom input objects available. An instance of this application has been
+pushed to shinyapps.io under the free plan. That means that if I haven’t
+run out of computation time you can find it at
+<https://knifecake.shinyapps.io/gezellig_demos/>. Alternatively, you can
+run it locally. After installing the package, you may launch it with
 
 ``` r
 library("gezellig")

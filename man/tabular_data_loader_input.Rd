@@ -13,7 +13,8 @@ tabular_data_loader_input(
   allow_rownames_toggle = FALSE,
   na_string = "NA",
   allowed_decimal_separators = c(Dot = ".", Comma = ","),
-  allow_transposition = FALSE
+  allow_transposition = FALSE,
+  cols = 1
 )
 }
 \arguments{
@@ -39,6 +40,8 @@ column as a header}
 the integral and fractional parts in a number}
 
 \item{allow_transposition}{whether to give the option to transpose the table}
+
+\item{cols}{number of columns through which to display the input controls}
 }
 \value{
 a list of tags that can be included in a shiny UI definition
