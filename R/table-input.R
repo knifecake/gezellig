@@ -140,6 +140,13 @@ ti_radio <- function(name, options) {
        "options" = hash2json(options))
 }
 
+#' @rdname ti_inputs
+#' @export
+ti_text <- function(name) {
+  list("name" = name,
+       "type" = "text")
+}
+
 #' Table input asset manifest
 #'
 #' An \code{\link{htmlDependency}} object describing the assets (JS and CSS

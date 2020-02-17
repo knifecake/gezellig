@@ -24,6 +24,11 @@ const buildRadioButtons = function(field, selected) {
   }).join(' ') + '</form>';
 };
 
+const buildText = function(field, value) {
+  return '<form class="form-inline">' +
+    '<input type="text" value="' + value + '"></form>';
+};
+
 const buildHeader = function(fields) {
   return '<thead>' +
   fields.map(function(field) {
@@ -37,11 +42,13 @@ const buildRow = function(row, fields) {
   fields.map(function(field) {
     let ret = '<td data-input-type="' + field.type + '" data-input-name="' + field.name + '">';
     if (field.type == 'checkbox') {
-      ret += buildCheckbox(field, row[field.name][0]);
+      ret += buildCheckbox(field, row[field.name]);
     } else if (field.type == 'radio') {
       ret += buildRadioButtons(field, row[field.name]);
     } else if (field.type == 'dropdown') {
       ret += buildDropdown(field, row[field.name]);
+    } else if (field.type == 'text') {
+      ret += buildText(field, row[field.name]);
     } else {
       ret += row[field.name];
     }
@@ -80,6 +87,10 @@ const parseTable = function(el) {
           record[name] = $(field).find('select').val();
           break;
 
+        case 'text':
+          record[name] = $(field).find('input').val();
+          break;
+
         default:
           record[name] = field.innerText;
       }
@@ -93,7 +104,6 @@ let binding = new Shiny.InputBinding();
 
 $.extend(binding, {
   find: function(scope) {
-    console.log("found");
     return $(scope).find('.gz_table_input');
   },
 
@@ -101,12 +111,10 @@ $.extend(binding, {
   },
 
   subscribe: function(el, callback) {
-    console.log("subscribed");
     $(el).on('change', 'input, select', callback);
   },
 
   receiveMessage: function(el, message) {
-    console.log("received message");
     buildTable(el, message.data, message.fields);
   },
 

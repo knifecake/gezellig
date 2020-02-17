@@ -33,10 +33,12 @@ server <- function(input, output, session) {
 ti_fields <- list(ti_label("Name"),
                   ti_checkbox("Done"),
                   ti_dropdown("Priority", c("normal" = "Normal",
-                                            "high" = "High")))
+                                            "high" = "High")),
+                  ti_text("Contents"))
 
 ti_data <- data.frame(Name = c("Task 1", "Task 2"),
                       Done = c(TRUE, FALSE),
-                      Priority = c("normal", "high"))
+                      Priority = c("normal", "high"),
+                      Contents = c("My first task", "Another task"))
 
 shinyApp(ui = ui, server = server)
