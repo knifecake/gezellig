@@ -8,7 +8,7 @@ ui <- fluidPage(
      tabPanel(
        "Tabular loader",
        wellPanel(
-         tabular_data_loader_input("tabular", cols = 3)
+         tabular_data_loader_input("tabular", ncols = 3)
        ),
 
        h3("Preview"),

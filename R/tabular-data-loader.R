@@ -26,7 +26,7 @@
 #' @param allowed_decimal_separators the characters that may be used to separate
 #'   the integral and fractional parts in a number
 #' @param allow_transposition whether to give the option to transpose the table
-#' @param cols number of columns through which to display the input controls
+#' @param ncols number of columns through which to display the input controls
 #'
 #' @return a list of tags that can be included in a shiny UI definition
 #'
@@ -64,11 +64,10 @@ tabular_data_loader_input <-
            allowed_decimal_separators = c("Dot" = ".",
                                           "Comma" = ","),
            allow_transposition = FALSE,
-           cols = 1) {
+           ncols = 1) {
   ns <- NS(id)
 
-  div(
-    css_tweaks(cols),
+  multicolumn(ncols,
     fileInput(ns("file"), file_label),
     if (!is.null(allowed_field_separators))
       radioButtons(ns("sep"),
@@ -78,14 +77,6 @@ tabular_data_loader_input <-
       radioButtons(ns("quote"),
                    "Field delimiter",
                    choices = allowed_field_delimiters),
-    if (!is.null(allow_header_toggle))
-      checkboxInput(ns("header"),
-                    "First row is header",
-                    value = allow_header_toggle),
-    if (!is.null(allow_rownames_toggle))
-      checkboxInput(ns("rownames"),
-                    "First column is header",
-                    value = allow_rownames_toggle),
     if (!is.null(allowed_decimal_separators))
       radioButtons(ns("dec"),
                    "Decimal separator",
@@ -94,11 +85,19 @@ tabular_data_loader_input <-
       textInput(ns("na_string"),
                 "NA String",
                 value = na_string),
+    if (!is.null(allow_header_toggle))
+      checkboxInput(ns("header"),
+                    "First row is header",
+                    value = allow_header_toggle),
+    if (!is.null(allow_rownames_toggle))
+      checkboxInput(ns("rownames"),
+                    "First column is header",
+                    value = allow_rownames_toggle),
     if (!is.null(allow_transposition))
       checkboxInput(ns("transpose"),
                     "Transpose table",
                     value = allow_transposition),
-    class = "multicolumn-form"
+    unit_element = ".form-group"
   )
 }
 
@@ -126,22 +125,6 @@ tabular_data_loader <- function(input, output, session, id) {
                      na.strings = input$na_string,
                      row.names = if (input$rownames) 1 else NULL)
 
-    if (isTruthy(input$transpose)) t(df) else df
+    return(if (isTruthy(input$transpose)) t(df) else df)
   })
-}
-
-css_tweaks <- function(cols) {
-  list(
-    tags$head(
-      tags$style(
-        HTML(sprintf("
-.multicolumn-form {
-  column-count: %d;
-  column-gap: 1rem;
-}
-
-.multicolumn-form .form-group {
-  break-inside: avoid;
-  margin-left: 1px;
-}", cols)))))
 }
