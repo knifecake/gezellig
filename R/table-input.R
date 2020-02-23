@@ -74,7 +74,8 @@ ti <- function(input, output, session, id, fields, data) {
   session$sendInputMessage("table_input",
                            jsonlite::toJSON(list("fields" = fields,
                                                  "data" = data),
-                                            auto_unbox = F))
+                                            auto_unbox = F,
+                                            na = "string"))
 
   reactive({
     if (isTruthy(input$table_input))
@@ -99,7 +100,8 @@ update_ti <- function(session, id, fields, data) {
   session$sendInputMessage(ns("table_input"),
                            jsonlite::toJSON(list("fields" = fields,
                                                  "data" = data),
-                                            auto_unbox = F))
+                                            auto_unbox = F,
+                                            na = "string"))
 }
 
 #' Inputs for table input (ti)
@@ -168,8 +170,8 @@ ti_assets <- function() {
 #' @param hash a (possibly nested) named list
 #' @return a data.frame that behaves as expected with \code{jsonlite::toJSON}.
 hash2json <- function(hash) {
-  values <- names(hash)
-  labels <- unname(hash)
+  labels <- names(hash)
+  values <- unname(hash)
 
   as.data.frame(list("value" = values, "label" = labels))
 }
