@@ -39,12 +39,12 @@
 ti_input <- function(id) {
   # create a namespace to avoid name collisions with other modules / other
   # instances of this one
-  ns <- NS(id)
+  ns <- shiny::NS(id)
 
-  tagList(
+  shiny::tagList(
     ti_assets(),
-    tags$div(
-      tags$table(
+    shiny::tags$div(
+      shiny::tags$table(
         # the table content is build on the client through the shiny binding
         class = "table table-bordered table-condensed"
       ),
@@ -77,8 +77,8 @@ ti <- function(input, output, session, id, fields, data) {
                                             auto_unbox = F,
                                             na = "string"))
 
-  reactive({
-    if (isTruthy(input$table_input))
+  shiny::reactive({
+    if (shiny::isTruthy(input$table_input))
       jsonlite::fromJSON(input$table_input)
     else
       NULL
@@ -95,7 +95,7 @@ ti <- function(input, output, session, id, fields, data) {
 #' @export
 #' @seealso \code{\link{ti}}
 update_ti <- function(session, id, fields, data) {
-  ns <- NS(id)
+  ns <- shiny::NS(id)
 
   session$sendInputMessage(ns("table_input"),
                            jsonlite::toJSON(list("fields" = fields,

@@ -13,7 +13,7 @@
 #'
 #' @export
 multicolumn <- function(ncols, ..., unit_element = NULL) {
-  tags$div(
+  shiny::tags$div(
     multicolumn_css(ncols, unit_element),
     ...,
     class = "multicolumn"
@@ -39,7 +39,7 @@ multicolumn_css <- function(ncols, unit_element = NULL) {
 
 
   list(
-    tags$head(
-      tags$style(
-        HTML(paste0(wrapper_css, inner_css)))))
+    shiny::tags$head(
+      shiny::tags$style(
+        shiny::HTML(paste0(wrapper_css, inner_css)))))
 }

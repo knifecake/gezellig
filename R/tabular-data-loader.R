@@ -65,38 +65,38 @@ tabular_data_loader_input <-
                                           "Comma" = ","),
            allow_transposition = FALSE,
            ncols = 1) {
-  ns <- NS(id)
+  ns <- shiny::NS(id)
 
   multicolumn(ncols,
-    fileInput(ns("file"), file_label),
+              shiny::fileInput(ns("file"), file_label),
     if (!is.null(allowed_field_separators))
-      radioButtons(ns("sep"),
-                   "Field separator",
-                   choices = allowed_field_separators),
+      shiny::radioButtons(ns("sep"),
+                          "Field separator",
+                          choices = allowed_field_separators),
     if (!is.null(allowed_field_delimiters))
-      radioButtons(ns("quote"),
-                   "Field delimiter",
-                   choices = allowed_field_delimiters),
+      shiny::radioButtons(ns("quote"),
+                          "Field delimiter",
+                          choices = allowed_field_delimiters),
     if (!is.null(allowed_decimal_separators))
-      radioButtons(ns("dec"),
-                   "Decimal separator",
-                   choices = allowed_decimal_separators),
+      shiny::radioButtons(ns("dec"),
+                          "Decimal separator",
+                          choices = allowed_decimal_separators),
     if (!is.null(na_string))
-      textInput(ns("na_string"),
-                "NA String",
-                value = na_string),
+      shiny::textInput(ns("na_string"),
+                       "NA String",
+                        value = na_string),
     if (!is.null(allow_header_toggle))
-      checkboxInput(ns("header"),
-                    "First row is header",
-                    value = allow_header_toggle),
+      shiny::checkboxInput(ns("header"),
+                           "First row is header",
+                            value = allow_header_toggle),
     if (!is.null(allow_rownames_toggle))
-      checkboxInput(ns("rownames"),
-                    "First column is header",
-                    value = allow_rownames_toggle),
+      shiny::checkboxInput(ns("rownames"),
+                           "First column is header",
+                           value = allow_rownames_toggle),
     if (!is.null(allow_transposition))
-      checkboxInput(ns("transpose"),
-                    "Transpose table",
-                    value = allow_transposition),
+      shiny::checkboxInput(ns("transpose"),
+                           "Transpose table",
+                           value = allow_transposition),
     unit_element = ".form-group"
   )
 }
@@ -110,13 +110,15 @@ tabular_data_loader_input <-
 #'
 #' @return a \code{\link{data.frame}} wrapped inside a reactive context
 #'
+#' @importFrom utils read.table
+#'
 #' @seealso \code{\link{tabular_data_loader_input}} for the input function and
 #'   an example
 #'
 #' @export
 tabular_data_loader <- function(input, output, session, id) {
-  reactive({
-    req(input$file)
+  shiny::reactive({
+    shiny::req(input$file)
 
     df <- read.table(input$file$datapath,
                      header = input$header,
@@ -125,6 +127,6 @@ tabular_data_loader <- function(input, output, session, id) {
                      na.strings = input$na_string,
                      row.names = if (input$rownames) 1 else NULL)
 
-    return(if (isTruthy(input$transpose)) t(df) else df)
+    return(if (shiny::isTruthy(input$transpose)) t(df) else df)
   })
 }
