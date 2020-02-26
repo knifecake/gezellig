@@ -1,6 +1,6 @@
 Package: gezellig
 Type: Package
-Title: A collection of UI modules for Shiny 
+Title: A Collection of UI Modules for Shiny
 Version: 0.1.0
 Authors@R: c(
     person("Elias", "Hernandis", email = "eliashernandis@gmail.com",
