@@ -120,12 +120,19 @@ tabular_data_loader <- function(input, output, session, id) {
   shiny::reactive({
     shiny::req(input$file)
 
+    sep <- if (shiny::isTruthy(input$sep)) input$sep else ""
+    quote <- if (shiny::isTruthy(input$quote)) input$quote else "\""
+    na.strings <- if (shiny::isTruthy(input$na_string)) input$na_string else "NA"
+    header <- if (shiny::isTruthy(input$header)) input$header else FALSE
+    row.names <- if (shiny::isTruthy(input$rownames)) 1 else NULL
+
+
     df <- read.table(input$file$datapath,
-                     header = input$header,
-                     sep = input$sep,
-                     quote = input$quote,
-                     na.strings = input$na_string,
-                     row.names = if (input$rownames) 1 else NULL,
+                     header = header,
+                     sep = sep,
+                     quote = quote,
+                     na.strings = na.strings,
+                     row.names = row.names,
                      check.names = FALSE)
 
     return(if (shiny::isTruthy(input$transpose)) t(df) else df)
