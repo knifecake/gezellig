@@ -125,7 +125,8 @@ tabular_data_loader <- function(input, output, session, id) {
                      sep = input$sep,
                      quote = input$quote,
                      na.strings = input$na_string,
-                     row.names = if (input$rownames) 1 else NULL)
+                     row.names = if (input$rownames) 1 else NULL,
+                     check.names = FALSE)
 
     return(if (shiny::isTruthy(input$transpose)) t(df) else df)
   })
