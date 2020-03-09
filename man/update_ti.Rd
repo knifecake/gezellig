@@ -4,16 +4,16 @@
 \alias{update_ti}
 \title{Update a table input}
 \usage{
-update_ti(session, id, fields, data)
+update_ti(session, fields, data)
 }
 \arguments{
 \item{session}{the shiny session object}
 
-\item{id}{the id of the table input to update}
-
 \item{fields}{a list of the fields present in each row}
 
 \item{data}{a matrix representing the state of the fields}
+
+\item{id}{the id of the table input to update}
 }
 \description{
 Update a table input

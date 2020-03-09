@@ -1,29 +1,32 @@
 library(shiny)
 library(gezellig)
 
-ui <- fluidPage(
-   titlePanel("Gezellig demos"),
-   tabsetPanel(
-     # Tabular loader
-     tabPanel(
-       "Tabular loader",
-       wellPanel(
-         tabular_data_loader_input("tabular", ncols = 3)
-       ),
+ui <- function(request) {
+  fluidPage(
+    titlePanel("Gezellig demos"),
+    bookmarkButton(),
+    tabsetPanel(
+      # Tabular loader
+      tabPanel(
+        "Tabular loader",
+        wellPanel(
+          tabular_data_loader_input("tabular", ncols = 3)
+        ),
 
-       h3("Preview"),
-       div(
-         tableOutput("tabular_output"),
-         class = "table-responsive"
-       )
-     ),
+        h3("Preview"),
+        div(
+          tableOutput("tabular_output"),
+          class = "table-responsive"
+        )
+      ),
 
-     # Table input (ti)
-     tabPanel("Table input",
-       ti_input("table_input")
-     )
-   )
-)
+      # Table input (ti)
+      tabPanel("Table input",
+        ti_input("table_input")
+      )
+    )
+  )
+}
 
 
 server <- function(input, output, session) {
@@ -49,4 +52,4 @@ ti_data <- data.frame(Task = c("Clean up the house", "Walk the dog", "Groceries"
                       Priority = c("normal", "high", "normal", "high"),
                       Contents = c("Toilets done last week", "Potty training: 90%", "Cheese and bread", "Iteration #1928832"))
 
-shinyApp(ui = ui, server = server)
+shinyApp(ui = ui, server = server, enableBookmarking = "server")

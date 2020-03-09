@@ -54,6 +54,12 @@ ti_input <- function(id) {
   )
 }
 
+build_input <- function(input) {
+  if (input$type == "label") {
+    shiny::tags$span()
+  }
+}
+
 #' Table input (server function)
 #'
 #' @param input the shiny \code{input} object
@@ -70,14 +76,13 @@ ti_input <- function(id) {
 #'   \code{\link{update_ti}} for updating the ti on the fly (similarly to
 #'   \code{updateSelectInput} for instance).
 ti <- function(input, output, session, id, fields, data) {
-
   session$sendInputMessage("table_input",
                            jsonlite::toJSON(list("fields" = fields,
                                                  "data" = data),
                                             auto_unbox = F,
                                             na = "string"))
 
-  shiny::reactive({
+  table <- shiny::reactive({
     if (shiny::isTruthy(input$table_input)) {
       res = jsonlite::fromJSON(input$table_input)
       if (length(res) == 0) {
@@ -89,6 +94,22 @@ ti <- function(input, output, session, id, fields, data) {
       NULL
     }
   })
+
+  # register bookmarking callbacks
+  onBookmark(function(state) {
+    state$values$fields <- fields
+    state$values$data <- table()
+  })
+
+  onRestored(function(state) {
+    session$sendInputMessage("table_input",
+                             jsonlite::toJSON(list("fields" = state$values$fields,
+                                                   "data" = state$values$data),
+                                              auto_unbox = F,
+                                              na = "string"))
+  })
+
+  table
 }
 
 #' Update a table input
