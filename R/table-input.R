@@ -78,10 +78,16 @@ ti <- function(input, output, session, id, fields, data) {
                                             na = "string"))
 
   shiny::reactive({
-    if (shiny::isTruthy(input$table_input))
-      jsonlite::fromJSON(input$table_input)
-    else
+    if (shiny::isTruthy(input$table_input)) {
+      res = jsonlite::fromJSON(input$table_input)
+      if (length(res) == 0) {
+        data
+      } else {
+        res
+      }
+    } else {
       NULL
+    }
   })
 }
 
